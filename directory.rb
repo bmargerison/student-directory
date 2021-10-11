@@ -4,9 +4,10 @@ def print_header
 end
 
 def print_names(names)
-  names.each_with_index do |student, index| 
-    puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)" if 
-    student[:name][0] == "H" && student[:name].length < 12
+  count = 0
+  while count < names.length
+    puts "#{count+1}. #{names[count][:name]} (#{names[count][:cohort]})"
+    count += 1
   end
 end
 
