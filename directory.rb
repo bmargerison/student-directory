@@ -5,7 +5,8 @@ end
 
 def print_names(names)
   names.each_with_index do |student, index| 
-    puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+    puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)" if 
+    student[:name][0] == "H" 
   end
 end
 
