@@ -4,6 +4,7 @@ end
 
 def print_names(names)
   puts "------------".center(50)
+  return nil if names.nil? 
   names.each_with_index do |student, index| 
     print "#{index + 1}. #{student[:name]} (cohort: #{student[:cohort]}, "
     puts "hobby: #{student[:hobby]})"
@@ -43,11 +44,11 @@ def input_students
     puts "------------".center(50)
     puts "Please enter the next name (or leave blank to exit)"
   end
-  students.empty? ? nil : students 
+  students
 end
 
-students = input_students
+students_selected = input_students
 print_header
-print_names(students)
-print_footer(students)
-print_names_cohort(students)
+print_names(students_selected)
+print_footer(students_selected)
+print_names_cohort(students_selected)
