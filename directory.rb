@@ -1,6 +1,6 @@
 def print_header
-  puts "The students of Villains Academy"
-  puts "------------"
+  puts "The students of Villains Academy".center(50)
+  puts "------------".center(50)
 end
 
 def print_names(names)
