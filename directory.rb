@@ -10,8 +10,18 @@ def print_names(names)
   end
 end
 
+def print_names_cohort(students)
+  current_cohorts = students.map { |student| student[:cohort] }.uniq
+  current_cohorts.each do |month|
+    puts "Students in the #{month} cohort: "
+    students.each do |student|
+      puts student[:name] if student[:cohort] == month
+    end
+  end
+end
+
 def print_footer(names)
-  print "Overall, we have #{names.count} great students"
+  puts "Overall, we have #{names.count} great students"
 end
 
 def input_students
@@ -23,7 +33,7 @@ def input_students
     hobby = gets.chomp
     puts "What cohort did they join?"
     month = gets.chomp
-    month.empty? ? month = :november : month.to_s
+    month.empty? ? month = november : month
     students << {name: name, cohort: month, hobby: hobby}
     puts "Now we have #{students.count} students"
     puts "Please enter the next name (or leave blank to exit)"
@@ -36,3 +46,4 @@ students = input_students
 print_header
 print_names(students)
 print_footer(students)
+print_names_cohort(students)
