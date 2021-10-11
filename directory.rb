@@ -1,9 +1,9 @@
 def print_header
   puts "The students of Villains Academy".center(50)
-  puts "------------".center(50)
 end
 
 def print_names(names)
+  puts "------------".center(50)
   names.each_with_index do |student, index| 
     print "#{index + 1}. #{student[:name]} (cohort: #{student[:cohort]}, "
     puts "hobby: #{student[:hobby]})"
@@ -11,6 +11,7 @@ def print_names(names)
 end
 
 def print_names_cohort(students)
+  puts "------------".center(50)
   current_cohorts = students.map { |student| student[:cohort] }.uniq
   current_cohorts.each do |month|
     puts "Students in the #{month} cohort: "
@@ -21,25 +22,28 @@ def print_names_cohort(students)
 end
 
 def print_footer(names)
+  puts "------------".center(50)
   puts "Overall, we have #{names.count} great students"
 end
 
 def input_students
-  puts "Please enter the name of the first student"
   students = []
-  name = gets.chomp
-  while !name.empty? do
+  puts "Please enter the name of the first student"
+  while true
+    name = gets.strip
+    break if name.empty?
     puts "What is their favourite hobby?"
-    hobby = gets.chomp
+    hobby = gets.strip
     puts "What cohort did they join?"
-    month = gets.chomp
+    month = gets.strip
     month.empty? ? month = november : month
     students << {name: name, cohort: month, hobby: hobby}
-    puts "Now we have #{students.count} students"
+    puts "Now we have #{students.count} students" if students.length > 1
+    puts "Now we have 1 student" if students.length == 1
+    puts "------------".center(50)
     puts "Please enter the next name (or leave blank to exit)"
-    name = gets.chomp
   end
-  students
+  students.empty? ? nil : students 
 end
 
 students = input_students
