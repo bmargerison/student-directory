@@ -13,6 +13,7 @@ end
 
 def print_names_cohort(students)
   puts "------------".center(50)
+  return nil if students.nil? 
   current_cohorts = students.map { |student| student[:cohort] }.uniq
   current_cohorts.each do |month|
     puts "Students in the #{month} cohort: "
@@ -24,7 +25,7 @@ end
 
 def print_footer(names)
   puts "------------".center(50)
-  puts "Overall, we have #{names.count} great students"
+  puts "Overall, we have #{names.nil? ? 0 : names.count} great students"
 end
 
 def input_students
@@ -47,8 +48,36 @@ def input_students
   students
 end
 
-students_selected = input_students
-print_header
-print_names(students_selected)
-print_footer(students_selected)
-print_names_cohort(students_selected)
+def interactive_menu
+  students_selected =[]
+  loop do
+    puts "------------".center(50)
+    puts "1. Input the students."
+    puts "2. Show the students."
+    puts "3. Show the students grouped by cohort."
+    puts "9. Exit."
+    selection = gets.chomp
+    case selection
+    when "1"
+      puts "------------".center(50)
+      students_selected = input_students
+    when "2"
+      puts "------------".center(50)
+      print_header
+      print_names(students_selected)
+      print_footer(students_selected)
+    when "3"
+      puts "------------".center(50)
+      print_header
+      print_names_cohort(students_selected)
+      print_footer(students_selected)
+    when "9"
+      exit
+    else
+      puts "------------".center(50)
+      puts "I don't know what you mean, try again."
+    end
+  end
+end
+
+interactive_menu
