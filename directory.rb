@@ -61,6 +61,7 @@ def print_menu
   puts "1. Input the students."
   puts "2. Show the students."
   puts "3. Show the students grouped by cohort."
+  puts "4. Save the list to students.csv."
   puts "9. Exit."
 end
 
@@ -81,12 +82,25 @@ def process(selection)
   when "3"
     puts "------------".center(50)
     show_students(1)
+  when "4"
+    puts "------------".center(50)
+    save_students
   when "9"
     exit
   else
     puts "------------".center(50)
     puts "I don't know what you mean, try again."
   end
+end
+
+def save_students
+  file = File.open("students.csv", "w")
+  @students.each do |pupil|
+    student_data = [pupil[:name], pupil[:hobby], pupil[:cohort]]
+    csv_line = student_data.join(",")
+    file.puts csv_line
+  end
+  file.close
 end
 
 interactive_menu
